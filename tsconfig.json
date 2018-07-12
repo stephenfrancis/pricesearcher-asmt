@@ -1,0 +1,24 @@
+
+// config for transpilation to CommonJS module format, suitable for node
+// ES6 module format should be supported by node >= 8.5 with `--experimental-modules` flag
+// But it's choking on imports from node built-in modules...
+
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "jsx": "react",
+    "allowSyntheticDefaultImports": false,
+    "lib" : [
+      "es2015",
+      "dom",
+    ],
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+  ],
+  "exclude": [
+    "node_modules",
+  ],
+}
