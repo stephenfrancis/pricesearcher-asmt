@@ -1,11 +1,11 @@
 
 import * as React from 'react';
 import SearchHeader from "./SearchHeader";
-import SearchList from "./SearchList";
+import SearchLoad from "./SearchLoad";
 import SearchFooter from "./SearchFooter";
 
 const data_url = "https://pricesearcher-frontend-test.herokuapp.com/products?";
-const page_limit = 20;
+const page_limit = 3;
 
 interface Props {}
 
@@ -21,7 +21,7 @@ export default class Search extends React.Component<Props, State> {
     super(props);
     this.state = {
       full_text_search: null,
-      page: 0,
+      page: 1,
     };
     this.getPage = this.getPage.bind(this);
     this.nextPage = this.nextPage.bind(this);
@@ -36,7 +36,7 @@ export default class Search extends React.Component<Props, State> {
 
 
   private getURL() {
-    let url: string = data_url + `_page=${this.state.page}&limit=${page_limit}`;
+    let url: string = data_url + `_page=${this.state.page}&_limit=${page_limit}`;
     if (this.state.full_text_search) {
       url += `&q=${this.state.full_text_search}`;
     }
@@ -52,6 +52,9 @@ export default class Search extends React.Component<Props, State> {
 
 
   public prevPage() {
+    if (this.state.page < 1) {
+      return;
+    }
     this.setState({
       page: this.state.page - 1,
     });
@@ -62,7 +65,7 @@ export default class Search extends React.Component<Props, State> {
     return (
       <div>
         <SearchHeader setFullTextSearch={this.setFullTextSearch} />
-        <SearchList data_url={data_url} />
+        <SearchLoad data_url={data_url} />
         <SearchFooter getPage={this.getPage} nextPage={this.nextPage} prevPage={this.prevPage} />
       </div>
     );

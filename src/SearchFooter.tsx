@@ -21,18 +21,32 @@ export default class SearchFooter extends React.Component<Props, State> {
 
 
   public render() {
+    const page: number = this.props.getPage();
     return (
       <div>
-        <p>Page: {this.props.getPage()}</p>
-        <Button variant="contained" color="primary" onClick={this.props.prevPage}>
-          Previous Page
-        </Button>
-        <Button variant="contained" color="primary" onClick={this.props.nextPage}>
-          Next Page
-        </Button>
+        <p>Page: {page}</p>
+        {page > 1 && this.renderPrevButton()}
+        {this.renderNextButton()}
       </div>
     );
   }
 
+
+  private renderNextButton() {
+    return (
+      <Button variant="contained" color="primary" onClick={this.props.nextPage}>
+        Next Page
+      </Button>
+    );
+  }
+
+
+  private renderPrevButton() {
+    return (
+      <Button variant="contained" color="primary" onClick={this.props.prevPage}>
+        Previous Page
+      </Button>
+    );
+  }
 
 }
