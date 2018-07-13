@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`appearance 1`] = `
+<div>
+  <div
+    className="MuiFormControl-root-1"
+  >
+    <div
+      className="MuiInput-root-5 MuiInput-formControl-6 MuiInput-underline-9"
+    >
+      <input
+        aria-invalid={false}
+        className="MuiInput-input-13"
+        disabled={false}
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        placeholder="Search for..."
+        type="text"
+      />
+    </div>
+  </div>
+</div>
+`;

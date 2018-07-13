@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Card, CardHeader, CardMedia, CardContent, Dialog,
   GridListTile, GridListTileBar, Typography } from '@material-ui/core';
+// import { Area, } from 'react-simple-charts';
 
 interface Props {
   data: any;
@@ -70,6 +71,7 @@ export default class Product extends React.Component<Props, State> {
             <CardHeader
               title={this.props.data.product_name}
               subheader={<span>£ {this.props.data.price}</span>} />
+            {/* <Area data={this.props.data.price_history} /> */}
             <CardMedia image={this.props.data.image_url} style={{
               height: 0,
               paddingTop: '56.25%', // 16:9

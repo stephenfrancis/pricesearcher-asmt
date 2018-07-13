@@ -1,0 +1,36 @@
+
+import * as React from "react";
+import * as Renderer from "react-test-renderer";
+
+import Search from "../src/Search";
+
+// declare global {
+//   function fetch();
+// }
+
+beforeEach(() => {
+  global["fetch"] = jest.fn().mockImplementation(() => {
+      const p = new Promise((resolve, reject) => {
+        resolve({
+          ok: true,
+          Id: '123',
+          json: function() {
+            return {
+              Id: '123'
+            }
+          }
+        });
+      });
+      return p;
+  });
+});
+
+
+test("loads data on startup", () => {
+  const component = Renderer.create(
+    <Search />
+  );
+  let tree = component.toJSON();
+  expect(tree).toMatchSnapshot();
+
+});

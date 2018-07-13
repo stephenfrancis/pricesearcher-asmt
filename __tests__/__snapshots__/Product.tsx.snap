@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`appearance 1`] = `
+<div>
+  <li
+    className="MuiGridListTile-root-1"
+    onClick={[Function]}
+    style={
+      Object {
+        "margin": 5,
+      }
+    }
+  >
+    <div
+      className="MuiGridListTile-tile-2"
+    >
+      <img
+        alt="Dyson V7 Animal Cordless Stick Vacuum Cleaner"
+        src="https://img.fruugo.com/product/8/24/33566248_max.jpg"
+        style={
+          Object {
+            "maxHeight": 300,
+            "maxWidth": 300,
+          }
+        }
+      />
+      <div
+        className="MuiGridListTileBar-root-5 MuiGridListTileBar-titlePositionBottom-6 MuiGridListTileBar-rootSubtitle-8"
+      >
+        <div
+          className="MuiGridListTileBar-titleWrap-9"
+        >
+          <div
+            className="MuiGridListTileBar-title-12"
+          >
+            Dyson V7 Animal Cordless Stick Vacuum Cleaner
+          </div>
+          <div
+            className="MuiGridListTileBar-subtitle-13"
+          >
+            <span>
+              £ 
+              299
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+</div>
+`;

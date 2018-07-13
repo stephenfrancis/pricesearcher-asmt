@@ -1,5 +1,37 @@
 # PriceSearcher Assessment App
 
+
+## Installation and Execution
+
+1. `npm install`
+2. Run locally: `npm run start`
+3. Test locally: `npm run test`
+
+
+## Explanation and Progress
+
+I have used React to build this application, Jest for testing, and UI library based on
+Google's Material Design to nicely styled components.
+
+I used the browser's fetch API to get the data from the server, wrapped in the 'Search.tsx'
+component which manages the pagination, taking advantage of the data API's pagination
+functionality. The `pages_loaded` state property triggers re-rendering when a new data
+page is loaded.
+
+I then used a module called "react-infinite-scroller" to detect window scroll events
+past the extent of currently displayed data and to trigger fetches of subsequent blocks
+of data.
+
+I used the Material Design GridList to lay out the results, and a toggleable Dialog
+within the 'Product.tsx' component to render a more detailed view of each product. I
+experimented with a module called "react-simple-charts" to try to display price history
+graphically, but that caused issues that I did not have time to diagnose.
+
+Finally, I wrote component tests in jest. I ran into issues trying to mock around the
+data API and again I did not have time to rectify.
+
+
+
 ## Introduction:
 At Pricesearcher we have a database of 1.1bn products with more than 90bn prices associated
 with them. The website is how we communicate that data to the world and build a great
