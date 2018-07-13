@@ -16,6 +16,7 @@ interface State {
 
 // Top level app component
 export default class Search extends React.Component<Props, State> {
+  private max_page: number;
 
   constructor(props) {
     super(props);
@@ -23,9 +24,11 @@ export default class Search extends React.Component<Props, State> {
       full_text_search: null,
       page: 1,
     };
+    this.max_page = 2;
     this.getPage = this.getPage.bind(this);
     this.nextPage = this.nextPage.bind(this);
     this.prevPage = this.prevPage.bind(this);
+    this.setDataSize = this.setDataSize.bind(this);
     this.setFullTextSearch = this.setFullTextSearch.bind(this);
   }
 
@@ -45,6 +48,10 @@ export default class Search extends React.Component<Props, State> {
 
 
   public nextPage() {
+    if (this.state.page >= this.max_page) {
+      console.log(`attempting nextPage() when page is ${this.state.page} and max page is ${this.max_page}`);
+      return;
+    }
     this.setState({
       page: this.state.page + 1,
     });
@@ -52,7 +59,8 @@ export default class Search extends React.Component<Props, State> {
 
 
   public prevPage() {
-    if (this.state.page < 1) {
+    if (this.state.page <= 1) {
+      console.log(`attempting prevPage() when page is ${this.state.page}`);
       return;
     }
     this.setState({
@@ -65,16 +73,27 @@ export default class Search extends React.Component<Props, State> {
     return (
       <div>
         <SearchHeader setFullTextSearch={this.setFullTextSearch} />
-        <SearchLoad data_url={data_url} />
+        <SearchLoad data_url={data_url} setDataSize={this.setDataSize} />
         <SearchFooter getPage={this.getPage} nextPage={this.nextPage} prevPage={this.prevPage} />
       </div>
     );
   }
 
 
+  public setDataSize(data_size: number) {
+    this.max_page = Math.ceil(data_size / page_limit);
+    if (this.state.page > this.max_page) {
+      this.setState({
+        page: this.max_page,
+      });
+    }
+  }
+
+
   public setFullTextSearch(full_text_search: string) {
     this.setState({
       full_text_search,
+      page: 1, // always reset pagination!
     });
   }
 

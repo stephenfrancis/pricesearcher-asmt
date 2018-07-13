@@ -1,12 +1,12 @@
 
 import * as React from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import SearchList from "./SearchList";
-// import GridList from '@material-ui/core/GridList';
-// import Product from "./Product";
 
 
 interface Props {
   data_url: string;
+  setDataSize: (data_size: number) => void;
 }
 
 interface State {
@@ -38,7 +38,9 @@ export default class SearchLoad extends React.Component<Props, State> {
         "X-API-KEY": "46c0a1e171c76bb37784d60aad4df750",
       },
     }).then((response) => {
-      console.log(`SearchLoad.load: got response`);
+      const total: number = parseInt(response.headers["X-Total-Count"], 10);
+      console.log(`SearchLoad.load: got response, total possible items: ${total}`);
+      this.props.setDataSize(total);
       return response.json();
     }).then((data: Array<any>) => {
       console.log(`SearchLoad.load: settting state ${this.props.data_url}`);
@@ -51,14 +53,15 @@ export default class SearchLoad extends React.Component<Props, State> {
 
 
   public render() {
-    if (this.state.loaded_url !== this.props.data_url) {
+    const need_to_load = (this.state.loaded_url !== this.props.data_url);
+    if (need_to_load) {
       this.load();
     }
-    if (!this.state.data) {
-      return <div>Loading data...</div>;
-    }
     return (
-      <SearchList data={this.state.data} />
+      <div style={{ position: "relative", }}>
+        {this.state.data && (<SearchList data={this.state.data} />)}
+        {need_to_load && (<CircularProgress style={{ position: "absolute", }} />)}
+      </div>
     );
   }
 

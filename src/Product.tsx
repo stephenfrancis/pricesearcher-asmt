@@ -1,56 +1,86 @@
 
 import * as React from 'react';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
+import { Card, CardHeader, CardMedia, CardContent, Dialog,
+  GridListTile, GridListTileBar, Typography } from '@material-ui/core';
 
 interface Props {
   data: any;
 }
 
-interface State {}
+interface State {
+  modal_open: boolean;
+}
 
 // Top level app component
 export default class Product extends React.Component<Props, State> {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      modal_open: false,
+    };
+    this.closeModal = this.closeModal.bind(this);
+    this.openModal = this.openModal.bind(this);
+  }
+
+
+  private closeModal() {
+    this.setState({
+      modal_open: false,
+    });
+  }
+
+
+  private openModal() {
+    this.setState({
+      modal_open: true,
+    });
   }
 
 
   public render() {
     return (
       <div>
-        <Card>
-          <CardMedia
-            image={this.props.data.image_url}
-            title={this.props.data.product_name}
+        <GridListTile
+          onClick={this.openModal}
+          style={{
+            margin: 5,
+          }}
+        >
+          <img
+            src={this.props.data.image_url}
+            alt={this.props.data.product_name}
             style={{
-              height: 0,
-              paddingTop: '56.25%', // 16:9
+              maxWidth: 300,
+              maxHeight: 300,
             }}
           />
-          <CardContent>
-            <Typography gutterBottom variant="headline" component="h2">
-              {this.props.data.product_name}
-            </Typography>
-            <Typography component="p">
-              {this.props.data.description}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small" color="primary">
-              Share
-            </Button>
-            <Button size="small" color="primary">
-              Learn More
-            </Button>
-          </CardActions>
-        </Card>
+          <GridListTileBar
+            title={this.props.data.product_name}
+            subtitle={<span>£ {this.props.data.price}</span>}
+            // actionIcon={
+            //   <IconButton className={classes.icon}>
+            //     <InfoIcon />
+            //   </IconButton>
+            // }
+          />
+        </GridListTile>
+        <Dialog open={this.state.modal_open} onClose={this.closeModal}>
+          <Card raised={true}>
+            <CardHeader
+              title={this.props.data.product_name}
+              subheader={<span>£ {this.props.data.price}</span>} />
+            <CardMedia image={this.props.data.image_url} style={{
+              height: 0,
+              paddingTop: '56.25%', // 16:9
+            }} />
+            <CardContent>
+              <Typography>
+                {this.props.data.description}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Dialog>
       </div>
     );
   }

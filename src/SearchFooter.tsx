@@ -24,8 +24,7 @@ export default class SearchFooter extends React.Component<Props, State> {
     const page: number = this.props.getPage();
     return (
       <div>
-        <p>Page: {page}</p>
-        {page > 1 && this.renderPrevButton()}
+        {this.renderPrevButton(page === 1)}
         {this.renderNextButton()}
       </div>
     );
@@ -34,17 +33,28 @@ export default class SearchFooter extends React.Component<Props, State> {
 
   private renderNextButton() {
     return (
-      <Button variant="contained" color="primary" onClick={this.props.nextPage}>
-        Next Page
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={this.props.nextPage}
+        style={{ margin: 5, }}
+      >
+        Next
       </Button>
     );
   }
 
 
-  private renderPrevButton() {
+  private renderPrevButton(disabled) {
     return (
-      <Button variant="contained" color="primary" onClick={this.props.prevPage}>
-        Previous Page
+      <Button
+        variant="contained"
+        color="primary"
+        disabled={disabled}
+        onClick={this.props.prevPage}
+        style={{ margin: 5, }}
+      >
+        Previous
       </Button>
     );
   }

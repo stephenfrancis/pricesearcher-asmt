@@ -17,7 +17,7 @@ export default class SearchList extends React.Component<Props, State> {
   public render() {
     return (
       <div>
-        <GridList>
+        <GridList cellHeight={180}>
           {this.props.data.map((item) => {
             return <Product key={item.product_id} data={item} />;
           })}
