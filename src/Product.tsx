@@ -4,11 +4,11 @@ import { Card, CardHeader, CardMedia, CardContent, Dialog,
   GridListTile, GridListTileBar, Typography } from '@material-ui/core';
 // import { Area, } from 'react-simple-charts';
 
-interface Props {
+export interface Props {
   data: any;
 }
 
-interface State {
+export interface State {
   modal_open: boolean;
 }
 
