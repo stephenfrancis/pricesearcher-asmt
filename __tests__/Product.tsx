@@ -1,17 +1,12 @@
+/**
+ * @jest-environment jsdom
+ */
 
-import * as Jsdom from "jsdom";
-import * as Data from "../__test_data/Product.json";
-
-// A super simple DOM ready for React to render into
-// Store this DOM and the window in global scope ready for React to access
-global["document"] = new Jsdom.JSDOM("<!doctype html><html><body></body></html>");
-global["window"] = document["parentWindow"];
-
-// React import must be placed AFTER jsdom setup
 import * as React from "react";
 import * as ReactTestUtils from 'react-dom/test-utils';
 import { GridListTile, } from '@material-ui/core';
-import Product, { Props, State } from "../src/Product";
+import * as Data from "../__test_data/Product.json";
+import Product from "../src/Product";
 
 
 test("appearance", () => {
